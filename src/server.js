@@ -63,7 +63,7 @@ app.get('/contacts/:id', async (req, res, next) => {
 
 
     app.get('/', (req, res) => {
-        res.send('Hello, World!');
+        res.send('App contacts');
     },
     );
 
