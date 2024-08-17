@@ -22,7 +22,8 @@ export const getContactByIdController = async (req, res, next) => {
   const contact = await getContactById(id);
 
   if (!contact) {
-      throw createHttpError(404, 'Contact not found');
+    next(createHttpError(404, 'Contact not found'));
+    return;
   }
 
   res.status(200).send({
