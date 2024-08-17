@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import router from './routers/contacts.js';
 import notFoundHandler from './middlewares/notFoundHandler.js';
 import errorHandler from './middlewares/errorHandler.js';
-// import { getAllContacts, getContactById } from './services/contacts.js';
+
 
 dotenv.config();
 
