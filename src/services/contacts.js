@@ -2,14 +2,15 @@ import { ContactsCollection } from '../db/modelContact.js';
  import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 
 
-export async function getAllContacts ({ page,
-  perPage,
-  sortBy,
-  sortOrder,
+export async function getAllContacts ({ page = 1,
+  perPage = 10,
+  sortOrder = 'asc',
+  sortBy = '_id',
+  filter = {},
   }) {
 
 const limit = perPage;
-  const skip = page > 0 ? (page - 1) * perPage : 0;
+  const skip =(page - 1) * perPage;
 
   console.log("serv", limit, skip);
 
