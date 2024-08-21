@@ -4,25 +4,25 @@ import { ContactsCollection } from '../db/modelContact.js';
 
 export async function getAllContacts ({ page = 1,
   perPage = 10,
-  sortOrder = 'asc',
   sortBy = '_id',
+  sortOrder = 'asc',
   filter = {},
   }) {
 
 const limit = perPage;
-  const skip =(page - 1) * perPage;
+  const skip =page > 0 ? (page - 1) * perPage : 0;
 
-  console.log("serv", limit, skip);
-
+  // console.log("serv", limit, skip);
+  
   const contactsQuery = ContactsCollection.find();
 
-  // if (filter.type) {
-  //   contactsQuery.where('contactType').equals(filter.type);
-  // }
+   if (filter.contactType) {
+    contactsQuery.where('contactType').equals(filter.contactType);
+  }
 
-  // if (typeof filter.isFavourite === 'boolean') {
-  //   contactsQuery.where('isFavourite').equals(filter.isFavourite);
-  // }
+   if (typeof filter.isFavourite === 'boolean') {
+     contactsQuery.where('isFavourite').equals(filter.isFavourite);
+   }
 
 
  const [contactsCount, contacts] = await Promise.all([
@@ -30,7 +30,7 @@ const limit = perPage;
     contactsQuery
       .skip(skip)
       .limit(limit)
-      // .sort({ [sortBy]: sortOrder })
+      .sort({ [sortBy]: sortOrder })
       .exec(),
   ]);
 
