@@ -2,10 +2,11 @@ import express from 'express';
 import pinoHTTP from 'pino-http';
 import cors from 'cors';
 import dotenv from "dotenv";
-import router from './routers/contacts.js';
+// import router from './routers/contacts.js';
+import rootRouter from './routers/index.js';
 import notFoundHandler from './middlewares/notFoundHandler.js';
 import errorHandler from './middlewares/errorHandler.js';
-
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -16,7 +17,7 @@ export const setupServer = () => {
 
 app.use(express.json());
   app.use(cors());
-
+ app.use(cookieParser());
 
     const pino = pinoHTTP({
         transport: {
@@ -33,7 +34,8 @@ app.use(express.json());
     },
     );
 
-   app.use(router);
+    //    app.use(router);
+     app.use(rootRouter);
 
   app.use('*', notFoundHandler);
 
