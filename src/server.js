@@ -7,6 +7,8 @@ import rootRouter from './routers/index.js';
 import notFoundHandler from './middlewares/notFoundHandler.js';
 import errorHandler from './middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
+import { swaggerDocs } from './middlewares/swaggerDocs.js';
+
 
 dotenv.config();
 
@@ -27,7 +29,7 @@ app.use(express.json());
 
     app.use(pino);
 
-
+app.use('/api-docs', swaggerDocs());
 
     app.get('/', (req, res) => {
         res.send('App contacts');

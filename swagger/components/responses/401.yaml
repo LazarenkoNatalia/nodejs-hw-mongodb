@@ -1,0 +1,36 @@
+description: Unauthorized error
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+        - data
+      properties:
+        status:
+          type: integer
+          example: 401
+        message:
+          type: string
+          example: 
+           oneOf:
+             - Unauthorized
+             - Session not found
+             - Refresh token expired
+             - Session for such user not found
+             - Access token is expired
+             - Auth header should be of Bearer type
+        data:
+          type: object
+          required:
+            - message
+          properties:
+            message:
+              type: string
+              example:
+                oneOf:
+                  - Session not found
+                  - Refresh token expired
+                  - Session for such user not found
+                  - Auth header should be of Bearer type
